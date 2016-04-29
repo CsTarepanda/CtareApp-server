@@ -16,6 +16,9 @@ class Json:
         self.json_data = {}
         self.add(**data)
 
+    def loads(self, json_str, encoding="utf-8"):
+        self.json_data.update(json.loads(json_str, encoding))
+
     def add(self, **data):
         self.json_data.update(**data)
 
