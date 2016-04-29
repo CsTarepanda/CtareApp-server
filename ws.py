@@ -72,11 +72,12 @@ class WebSocket(tornado.websocket.WebSocketHandler):
 
 if __name__ == "__main__":
     import settings
+    from importlib import import_module
     wsservers = []
     for appname in settings.APPLICATIONS:
-        mod = __import__("{name}.ws".format(name=appname))
-        mod.ws.WebSocket.clients = {}
-        wsservers.append((mod.ws.WebSocket.URL, mod.ws.WebSocket))
+        mod = import_module("{name}.ws".format(name=appname))
+        mod.WebSocket.clients = {}
+        wsservers.append((mod.WebSocket.URL, mod.WebSocket))
     print("runserver port: {}".format(settings.PORT))
     print("run apps:\n - {}".format("\n - ".join(settings.APPLICATIONS)))
 
