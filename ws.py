@@ -1,5 +1,6 @@
 import tornado.ioloop
 import tornado.websocket
+import tornado.web
 from lib.mylib_cls import Json
 
 debug = True
@@ -14,6 +15,10 @@ class Router:
     def plus(cls, url):
         url = url if url.startswith("/") else "/{}".format(url)
         return cls.BASE_URL + url
+
+
+class Http(tornado.web.RequestHandler):
+    pass
 
 
 class WebSocket(tornado.websocket.WebSocketHandler):
@@ -92,7 +97,6 @@ class Application:
 
 
 def route(url_string="/"):
-    print(Application)
     url_string = url_string if url_string.startswith("/") else "/{}".format(url_string)
     def decorator(cls):
         cls.clients = {}
