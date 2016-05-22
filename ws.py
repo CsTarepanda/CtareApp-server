@@ -104,6 +104,8 @@ def route(url_string="/"):
         return cls
     return decorator
 
+router = route
+
 if __name__ == "__main__":
     import settings
     from importlib import import_module
